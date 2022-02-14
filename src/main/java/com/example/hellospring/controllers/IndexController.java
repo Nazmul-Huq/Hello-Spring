@@ -1,6 +1,7 @@
 package com.example.hellospring.controllers;
 
 import com.example.hellospring.services.ShowDay;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class IndexController {
 
-    private final ShowDay showDay;
+    private ShowDay showDay;
 
     public IndexController(ShowDay showDay) {
         this.showDay = showDay;
@@ -17,7 +18,7 @@ public class IndexController {
     @GetMapping("isitfriday")
     public String isItFriday(@RequestParam(value = "date", required = false) String date){
 
-        return this.showDay.calculateToday(date);
+        return showDay.calculateToday(date);
 
     }
 

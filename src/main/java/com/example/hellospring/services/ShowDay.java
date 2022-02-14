@@ -1,5 +1,6 @@
 package com.example.hellospring.services;
 
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -13,20 +14,17 @@ public class ShowDay {
         int day;
         int month;
         int year;
-
-        if (date.isEmpty()) {
-            LocalDate currentDate = LocalDate.now();
-            day = currentDate.getDayOfMonth();
-            month = currentDate.getMonthValue();
-            year = currentDate.getYear();
-        } else {
+        try {
             String[] inputDate = date.split("/");
             day = Integer.parseInt(inputDate[0]);
             month = Integer.parseInt(inputDate[1]);
             year = Integer.parseInt(inputDate[2]);
+        } catch (Exception e){
+            LocalDate currentDate = LocalDate.now();
+            day = currentDate.getDayOfMonth();
+            month = currentDate.getMonthValue();
+            year = currentDate.getYear();
         }
-
-
 
         if (month == 1)
         {
@@ -38,6 +36,7 @@ public class ShowDay {
             month = 14;
             year--;
         }
+
         int j = year/100;
         int k = year%100;
 
